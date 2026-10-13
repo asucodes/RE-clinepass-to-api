@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1400" viewBox="0 0 1200 1400" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0e14"/>
+      <stop offset="100%" stop-color="#0d1420"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4f8cff"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4a5568"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="1400" fill="url(#bg)"/>
+
+  <!-- Header (text only) -->
+  <g transform="translate(600, 0)" text-anchor="middle">
+    <text y="92" fill="#d4dce8" font-size="44" font-weight="700" letter-spacing="-1">ClinePass Bridge</text>
+    <text y="130" fill="#6b7789" font-size="19">Your $9.99 ClinePass subscription, usable from any OpenAI-compatible tool</text>
+  </g>
+
+  <!-- Flow diagram -->
+  <g transform="translate(0, 210)">
+    <rect x="80" y="0" width="280" height="170" rx="18" fill="#111620" stroke="#1e2635" stroke-width="2"/>
+    <text x="220" y="48" text-anchor="middle" fill="#d4dce8" font-size="24" font-weight="700">Your Harness</text>
+    <text x="220" y="80" text-anchor="middle" fill="#6b7789" font-size="15">OpenCode · LiteLLM</text>
+    <text x="220" y="104" text-anchor="middle" fill="#6b7789" font-size="15">scripts · any OpenAI client</text>
+    <text x="220" y="140" text-anchor="middle" fill="#34d399" font-size="14" font-weight="600">owns ALL tools &amp; execution</text>
+
+    <line x1="365" y1="85" x2="452" y2="85" stroke="#4a5568" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="410" y="63" text-anchor="middle" fill="#4a5568" font-size="11">chat/completions</text>
+
+    <rect x="460" y="0" width="280" height="170" rx="18" fill="#131c2e" stroke="#4f8cff" stroke-width="2.5"/>
+    <text x="600" y="48" text-anchor="middle" fill="#4f8cff" font-size="24" font-weight="700">This Bridge</text>
+    <text x="600" y="80" text-anchor="middle" fill="#6b7789" font-size="15">localhost:8081</text>
+    <text x="600" y="104" text-anchor="middle" fill="#6b7789" font-size="15">Bun · zero dependencies</text>
+    <text x="600" y="140" text-anchor="middle" fill="#4f8cff" font-size="14" font-weight="600">injects auth · auto-refreshes</text>
+
+    <line x1="745" y1="85" x2="832" y2="85" stroke="#4a5568" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="790" y="63" text-anchor="middle" fill="#4a5568" font-size="11">+ bearer token</text>
+
+    <rect x="840" y="0" width="280" height="170" rx="18" fill="#111620" stroke="#1e2635" stroke-width="2"/>
+    <text x="980" y="48" text-anchor="middle" fill="#d4dce8" font-size="24" font-weight="700">api.cline.bot</text>
+    <text x="980" y="80" text-anchor="middle" fill="#6b7789" font-size="15">12 ClinePass models</text>
+    <text x="980" y="104" text-anchor="middle" fill="#6b7789" font-size="15">GLM-5.3 · Kimi K3 · DeepSeek</text>
+    <text x="980" y="140" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="600">flat subscription rate</text>
+
+    <path d="M 980 175 Q 980 240 600 240 Q 220 240 220 175" fill="none" stroke="#4a5568" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+    <text x="600" y="264" text-anchor="middle" fill="#6b7789" font-size="15">model reply + tool_calls flow back untouched → your harness executes</text>
+  </g>
+
+  <!-- Key points -->
+  <g transform="translate(90, 560)">
+    <text fill="#4a5568" font-size="16" font-weight="700" letter-spacing="2.5">WHY IT WORKS</text>
+
+    <g transform="translate(0, 45)">
+      <rect width="490" height="130" rx="14" fill="#111620" stroke="#1e2635" stroke-width="2"/>
+      <circle cx="38" cy="42" r="16" fill="rgba(79,140,255,.15)"/>
+      <text x="38" y="48" text-anchor="middle" fill="#4f8cff" font-size="18" font-weight="700">1</text>
+      <text x="70" y="40" fill="#d4dce8" font-size="19" font-weight="600">Pure pass-through</text>
+      <text x="70" y="70" fill="#6b7789" font-size="15">No agent, no sandbox, no hidden sessions.</text>
+      <text x="70" y="94" fill="#6b7789" font-size="15">Requests forwarded verbatim, replies untouched.</text>
+    </g>
+
+    <g transform="translate(530, 45)">
+      <rect width="490" height="130" rx="14" fill="#111620" stroke="#1e2635" stroke-width="2"/>
+      <circle cx="38" cy="42" r="16" fill="rgba(52,211,153,.12)"/>
+      <text x="38" y="48" text-anchor="middle" fill="#34d399" font-size="18" font-weight="700">2</text>
+      <text x="70" y="40" fill="#d4dce8" font-size="19" font-weight="600">Auth is automatic</text>
+      <text x="70" y="70" fill="#6b7789" font-size="15">Uses your Cline login (workos: bearer prefix).</text>
+      <text x="70" y="94" fill="#6b7789" font-size="15">Silently refreshes tokens before they expire.</text>
+    </g>
+
+    <g transform="translate(0, 200)">
+      <rect width="490" height="130" rx="14" fill="#111620" stroke="#1e2635" stroke-width="2"/>
+      <circle cx="38" cy="42" r="16" fill="rgba(251,191,36,.12)"/>
+      <text x="38" y="48" text-anchor="middle" fill="#fbbf24" font-size="18" font-weight="700">3</text>
+      <text x="70" y="40" fill="#d4dce8" font-size="19" font-weight="600">Standard OpenAI protocol</text>
+      <text x="70" y="70" fill="#6b7789" font-size="15">Chat Completions in/out, streaming included.</text>
+      <text x="70" y="94" fill="#6b7789" font-size="15">Non-streaming {data} wrapper unwrapped for you.</text>
+    </g>
+
+    <g transform="translate(530, 200)">
+      <rect width="490" height="130" rx="14" fill="#111620" stroke="#1e2635" stroke-width="2"/>
+      <circle cx="38" cy="42" r="16" fill="rgba(139,92,246,.15)"/>
+      <text x="38" y="48" text-anchor="middle" fill="#8b5cf6" font-size="18" font-weight="700">4</text>
+      <text x="70" y="40" fill="#d4dce8" font-size="19" font-weight="600">Local only</text>
+      <text x="70" y="70" fill="#6b7789" font-size="15">Runs on your machine. Dashboard, one-click</text>
+      <text x="70" y="94" fill="#6b7789" font-size="15">OpenCode install, self-bootstrapping launcher.</text>
+    </g>
+  </g>
+
+  <!-- Setup strip -->
+  <g transform="translate(90, 980)">
+    <text fill="#4a5568" font-size="16" font-weight="700" letter-spacing="2.5">SETUP - THREE STEPS</text>
+
+    <g transform="translate(0, 42)">
+      <rect width="1020" height="120" rx="14" fill="#111620" stroke="#1e2635" stroke-width="2"/>
+      <g transform="translate(40, 60)">
+        <circle r="20" fill="url(#accent)"/>
+        <text y="7" text-anchor="middle" fill="#fff" font-size="19" font-weight="700">1</text>
+      </g>
+      <text x="75" y="50" fill="#d4dce8" font-size="18" font-weight="600">Unzip</text>
+      <text x="75" y="78" fill="#6b7789" font-size="14.5">bridge.ts + launcher for your OS</text>
+
+      <g transform="translate(380, 60)">
+        <circle r="20" fill="url(#accent)"/>
+        <text y="7" text-anchor="middle" fill="#fff" font-size="19" font-weight="700">2</text>
+      </g>
+      <text x="415" y="50" fill="#d4dce8" font-size="18" font-weight="600">Launch</text>
+      <text x="415" y="78" fill="#6b7789" font-size="14.5">installs Bun + Cline CLI, logs you in</text>
+
+      <g transform="translate(760, 60)">
+        <circle r="20" fill="url(#accent)"/>
+        <text y="7" text-anchor="middle" fill="#fff" font-size="19" font-weight="700">3</text>
+      </g>
+      <text x="795" y="50" fill="#d4dce8" font-size="18" font-weight="600">Link</text>
+      <text x="795" y="78" fill="#6b7789" font-size="14.5">one-click OpenCode install</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <g transform="translate(0, 1200)">
+    <rect x="90" y="0" width="1020" height="90" rx="14" fill="rgba(79,140,255,.07)" stroke="rgba(79,140,255,.3)" stroke-width="2"/>
+    <text x="600" y="38" text-anchor="middle" fill="#d4dce8" font-size="17" font-weight="600">Dashboard: http://localhost:8081 - status · tests · 12 models · harness snippets</text>
+    <text x="600" y="66" text-anchor="middle" fill="#6b7789" font-size="14">Windows: start-bridge.cmd · macOS/Linux: ./start-bridge.sh</text>
+  </g>
+
+  <text x="600" y="1352" text-anchor="middle" fill="#4a5568" font-size="14">clinepass-bridge.zip · works on a fresh device · zero npm dependencies</text>
+</svg>
