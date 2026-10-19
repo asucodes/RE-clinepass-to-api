@@ -151,6 +151,25 @@ async function getBearer(forceRefresh = false): Promise<string> {
 }
 
 async function forwardChat(bodyText: string, bearer: string): Promise<Response> {
+  // Cline's upstream 500s ("empty response content") when max_tokens is set on
+  // reasoning models, so drop it and let the provider apply its own cap.
+  // Everything else is forwarded verbatim.
+  let payload = bodyText;
+  try {
+    const parsed = JSON.parse(bodyText);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      let changed = false;
+      for (const key of ["max_tokens", "max_completion_tokens"]) {
+        if (key in parsed) {
+          delete parsed[key];
+          changed = true;
+        }
+      }
+      if (changed) payload = JSON.stringify(parsed);
+    }
+  } catch {
+    // not JSON: forward as-is
+  }
   return fetch(`${API_BASE}/api/v1/chat/completions`, {
     method: "POST",
     headers: {
@@ -158,7 +177,7 @@ async function forwardChat(bodyText: string, bearer: string): Promise<Response> 
       Authorization: `Bearer ${bearer}`,
       ...CLIENT_HEADERS,
     },
-    body: bodyText,
+    body: payload,
     signal: AbortSignal.timeout(300_000),
   });
 }
@@ -213,7 +232,13 @@ async function installToOpenCode(): Promise<{ ok: boolean; message: string; mode
       apiKey: "clinepass-local",
     },
     models: Object.fromEntries(
-      CLINE_PASS_MODELS.map((m) => [m.id, { name: `ClinePass ${m.name}` }])
+      CLINE_PASS_MODELS.map((m) => [
+        m.id,
+        {
+          name: `ClinePass ${m.name}`,
+          limit: { context: 1_000_000, output: 128_000 },
+        },
+      ])
     ),
   };
   writeFileSync(OPENCODE_CONFIG_PATH, JSON.stringify(config, null, 2));
